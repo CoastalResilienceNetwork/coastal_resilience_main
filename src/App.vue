@@ -1,13 +1,27 @@
-<template>
-    <q-layout view="lHh Lpr lFf" class="bg-white">
-      <!-- <q-header elevated>
-        <q-toolbar> 
-          <q-toolbar-title>
-            Quasar App
-          </q-toolbar-title>
-        </q-toolbar>
-      </q-header> -->
+<script setup>
+  import { ref } from 'vue'
+  import MapContainer from './components/MapContainer.vue' 
+
+  // export default {
+  //   name: 'MyLayout',
   
+    // setup () {
+      const leftDrawerOpen = ref(false)
+  
+      // const toggleLeftDrawer = () =>{
+      //   leftDrawerOpen.value = !leftDrawerOpen.value
+      // }
+  
+      // return {
+      //   leftDrawerOpen,
+      //   toggleLeftDrawer
+      // }
+    // }
+  // }
+</script>
+
+<template>
+    <q-layout view="lHh Lpr lFf" class="bg-white">  
       <q-drawer
         v-model="leftDrawerOpen"
         show-if-above
@@ -15,87 +29,63 @@
         class="bg-grey-2"
       >
         <q-list>
-          <q-item-label header>Essential Links</q-item-label>
+          <q-item >
+            <q-img src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
+              <q-item-section>
+                <q-item-label header>COASTAL<br>Resilience<br>Mapping Portal</q-item-label>
+                <q-btn color="green" text-color="black" label="Learn More" />
+              </q-item-section>
+            </q-img>
+          </q-item>
+        
+          <q-item>
+            <q-item-section>
+              <q-item-label caption>Coastal Resilience is a program led by The Nature Conservancy to examine nature’s role in reducing coastal flood risk. The program consists of an approach, a web mapping tool, and a network of practitioners around the world supporting hazard mitigation and climate adaptation planning.</q-item-label>
+            </q-item-section>
+          </q-item>
+          
+          <q-item>
+            <q-item-section>
+              <q-btn size="xl" outline style="color: goldenrod;" label="Australia" />
+            </q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section>
+              <q-btn size="xl" outline style="color: goldenrod;" label="Caribbean" />
+            </q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section>
+              <q-btn size="xl" outline style="color: goldenrod;" label="Indonesia" />
+            </q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section>
+              <q-btn size="xl" outline style="color: goldenrod;" label="Mexico and Central America" />
+            </q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section>
+              <q-btn size="xl" outline style="color: goldenrod;" label="United States" />
+            </q-item-section>
+          </q-item>
+
+          
           <q-item clickable target="_blank" rel="noopener" href="https://quasar.dev">
             <q-item-section avatar>
-             
             </q-item-section>
             <q-item-section>
               <q-item-label>Docs</q-item-label>
               <q-item-label caption>https://quasar.dev</q-item-label>
             </q-item-section>
           </q-item>
-          <q-item clickable target="_blank" rel="noopener" href="https://github.quasar.dev">
-            <q-item-section avatar>
-             
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>GitHub</q-item-label>
-              <q-item-label caption>github.com/quasarframework</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item clickable target="_blank" rel="noopener" href="http://chat.quasar.dev">
-            <q-item-section avatar>
-             
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>Discord Chat Channel</q-item-label>
-              <q-item-label caption>https://chat.quasar.dev</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item clickable target="_blank" rel="noopener" href="https://forum.quasar.dev">
-            <q-item-section avatar>
-             
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>Forum</q-item-label>
-              <q-item-label caption>https://forum.quasar.dev</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item clickable target="_blank" rel="noopener" href="https://twitter.quasar.dev">
-            <q-item-section avatar>
-              
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>Twitter</q-item-label>
-              <q-item-label caption>@quasarframework</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item clickable target="_blank" rel="noopener" href="https://facebook.quasar.dev">
-            <q-item-section avatar>
-             
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>Facebook</q-item-label>
-              <q-item-label caption>@QuasarFramework</q-item-label>
-            </q-item-section>
-          </q-item>
+          
         </q-list>
+        <p>Terms of Use</p>
       </q-drawer>
   
       <q-page-container>
-        <router-view />
+        <MapContainer msg="You did it!" />
       </q-page-container>
     </q-layout>
-  </template>
-  
-  <script>
-  import { ref } from 'vue'
-  
-  export default {
-    name: 'MyLayout',
-  
-    setup () {
-      const leftDrawerOpen = ref(false)
-  
-      function toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-  
-      return {
-        leftDrawerOpen,
-        toggleLeftDrawer
-      }
-    }
-  }
-  </script>
+</template>
