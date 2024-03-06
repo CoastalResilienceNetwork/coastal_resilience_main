@@ -1,23 +1,31 @@
 <script setup>
   import { ref } from 'vue'
   import MapContainer from './components/MapContainer.vue' 
+  import { useMatchMedia } from './useMatchMedia';
+  const smallScreen = ref(useMatchMedia('(max-width: 1005px)'));
+  
+  let openDrawer = false;
+  let closeDrawer = true;
+  if (smallScreen.value === true) {
+    closeDrawer = false;
+    openDrawer = true;
+  }
 
-  // export default {
-  //   name: 'MyLayout',
-  
-    // setup () {
-      const leftDrawerOpen = ref(false)
-  
-      const toggleLeftDrawer = () =>{
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-  
-      // return {
-      //   leftDrawerOpen,
-      //   toggleLeftDrawer
-      // }
-    // }
-  // }
+  const leftDrawerOpen = ref(false)  
+  const toggleLeftDrawer = () =>{
+    leftDrawerOpen.value = !leftDrawerOpen.value
+
+    if (leftDrawerOpen.value === true && smallScreen.value != true){
+      closeDrawer = true;
+      openDrawer = false;
+    
+    } else {
+      openDrawer = true;
+      closeDrawer = false;
+     
+    }
+  }
+
 </script>
 
 <template>
@@ -93,7 +101,8 @@
         </div>
         
       </q-drawer>
-      <q-btn id="drawer-toggle" dense flat round icon="menu" @click="toggleLeftDrawer" />
+      <q-btn id="drawer-toggle-close" v-show="closeDrawer" color="primary" round icon="chevron_left" @click="toggleLeftDrawer" />
+      <q-btn id="drawer-toggle-open" v-show="openDrawer"  color="primary" round icon="chevron_right" @click="toggleLeftDrawer" />
       <q-page-container>
         <MapContainer />
       </q-page-container>
@@ -101,13 +110,18 @@
 </template>
 
 <style>
+/* 1005 */
   .q-img__content > div {
     background: rgba(0, 0, 0, 0);
   }
-  #drawer-toggle {
+  #drawer-toggle-close {
     z-index: 2;
     position: fixed;
-    left: 33%;
+    left: calc(100vw*.3);
+  }
+  #drawer-toggle-open {
+    z-index: 2;
+    position: fixed;
   }
   .header-image {
     background-color: #38525a;
@@ -122,7 +136,7 @@
     padding: 10px;
   }
   .terms {
-    padding: 10px;
+    padding: 25px;
     a {
       color: #8dc558;
     }

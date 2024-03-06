@@ -3,7 +3,7 @@ import { onMounted } from "vue"
 import Map from '@arcgis/core/Map'
 import MapView from '@arcgis/core/views/MapView'
 import esriConfig from "@arcgis/core/config.js";
-import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer"
+import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer";
 
 esriConfig.apiKey = 'AAPK1d9ff5650e164ac09da678fe794990ae-BAm-ie8CRQuR0X-nJcYsklC7ry026EBzGjJYLwbr3NNw7fcCpE66BS8w9uC5_pu'
     
@@ -25,8 +25,7 @@ esriConfig.apiKey = 'AAPK1d9ff5650e164ac09da678fe794990ae-BAm-ie8CRQuR0X-nJcYskl
     };
     
     const pointPopup = {
-        "title": "{title}",
-        "content": "{description}"
+        "content": "<h2>{title}</h2><br><a href={mapUrl}>Open Map</a><br><br><p>{description}</p>"
       }
 
 
@@ -34,8 +33,8 @@ esriConfig.apiKey = 'AAPK1d9ff5650e164ac09da678fe794990ae-BAm-ie8CRQuR0X-nJcYskl
       url: "src/assets/points.geojson",
       copyright: "TNC",
       renderer: pointsRenderer,
-      outFields: ["title", "description"],
-      popupTemplate: pointPopup
+      outFields: ["title", "description", "mapUrl"],
+      popupTemplate: pointPopup,
     });
 
     const map = new Map({
@@ -45,23 +44,28 @@ esriConfig.apiKey = 'AAPK1d9ff5650e164ac09da678fe794990ae-BAm-ie8CRQuR0X-nJcYskl
 
     const view = new MapView({
       map: map,
-      center: [15.00, -3.00], // Longitude, latitude
-      zoom: 4, // Zoom level
+      center: [-81.00, 27.00], // Longitude, latitude
+      zoom: 3, // Zoom level
       container: 'map'
     });
+    
+    view.popup.visibleElements = {
+      collapseButton: false,
+      actionBar: false,
+      heading: false
+    }
+
+    view.ui.move([ "zoom"], "bottom-left");
 
     map.add(geojsonLayer)
   })
 </script>
 
 <template>
-  <div id="map" class="map">
-    
-  </div>
+  <div id="map" class="map"></div>
 </template>
 
-<style scoped>
-@import url("https://js.arcgis.com/4.24/@arcgis/core/assets/esri/themes/light/main.css");
+<style >
   .map {
     height: 100vh;
     width: 100%;
