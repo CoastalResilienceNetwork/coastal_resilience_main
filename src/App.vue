@@ -27,6 +27,18 @@
   }
 
   const alert = ref(false)
+  const mainDrawer = ref(true)
+  const australia = ref(false)
+
+  const toggleMain = () =>{
+    mainDrawer.value = !mainDrawer.value
+  }
+
+  const toggleAustralia = () => {
+    toggleMain()
+    australia.value = !australia.value;
+    
+  }
 
 </script>
 
@@ -50,6 +62,8 @@
             </q-img>
           </q-item>
         
+          <!-- Replacable main section -->
+          <div v-show="mainDrawer"> 
           <q-item>
             <q-item-section>
               <q-item-label class="main-caption" caption>Coastal Resilience is a program led by The Nature Conservancy to examine nature’s role in reducing coastal flood risk. The program consists of an approach, a web mapping tool, and a network of practitioners around the world supporting hazard mitigation and climate adaptation planning.</q-item-label>
@@ -58,7 +72,7 @@
           
           <q-item>
             <q-item-section>
-              <q-btn size="l" outline color='secondary' label="Australia" />
+              <q-btn size="l" outline color='secondary' label="Australia" @click="toggleAustralia"/>
             </q-item-section>
           </q-item>
           <q-item>
@@ -81,7 +95,26 @@
               <q-btn size="l" outline color='secondary' label="United States" />
             </q-item-section>
           </q-item>
-
+        </div>
+        <div v-show="australia" >
+          <q-btn icon="close" flat round dense @click="toggleAustralia"/>
+          <q-item>
+            <q-item-section>
+              <q-item-label class="main-caption" caption>The nation’s high level of biodiversity classifies it as one of 17 of the ‘megadiversity’ countries in the world, holding roughly two thirds of the world’s biodiversity. Climate adaptation strategies in Australia focus largely on coastal habitat restoration.</q-item-label>
+            </q-item-section>
+          </q-item>
+          
+          <q-item>
+            <q-item-section>
+              <q-btn size="l" outline color='secondary' label="Victoria" />
+            </q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section>
+              <q-btn size="l" outline color='secondary' label="Western Australia" />
+            </q-item-section>
+          </q-item>
+        </div>
 <!--           
           <q-item clickable target="_blank" rel="noopener" href="https://quasar.dev">
             <q-item-section avatar>
