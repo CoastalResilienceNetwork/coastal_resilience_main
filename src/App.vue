@@ -40,6 +40,8 @@
       >
         <q-list>
           <q-item class="header-image">
+           <q-btn class="offset-10" id="drawer-toggle-close" v-show="closeDrawer" color="secondary" round icon="chevron_left" @click="toggleLeftDrawer" />
+            
             <q-img src="./assets/wave-pattern.svg" style="height: 200px" fit="cover">
               <q-item-section>
                 <q-item-label class='header-label' color="white">COASTAL<br>Resilience<br>Mapping Portal</q-item-label>
@@ -103,7 +105,7 @@
         </div>
         
       </q-drawer>
-      <q-btn id="drawer-toggle-close" v-show="closeDrawer" color="primary" round icon="chevron_left" @click="toggleLeftDrawer" />
+      
       <q-btn id="drawer-toggle-open" v-show="openDrawer"  color="primary" round icon="chevron_right" @click="toggleLeftDrawer" />
 
       <q-dialog v-model="alert">
@@ -155,11 +157,12 @@
   #drawer-toggle-close {
     z-index: 2;
     position: fixed;
-    left: calc(100vw*.3);
+    top: 3px;
   }
   #drawer-toggle-open {
     z-index: 2;
     position: fixed;
+    top: 3px;
   }
   .header-image {
     background-color: #38525a;
