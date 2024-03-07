@@ -54,8 +54,7 @@ esriConfig.apiKey = 'AAPK1d9ff5650e164ac09da678fe794990ae-BAm-ie8CRQuR0X-nJcYskl
     
     const pointPopup = {
         "content": "<h2>{title}</h2><br><a href={mapUrl}>Open Map</a><br><br><p>{description}</p>"
-      }
-
+    }
 
     const geojsonLayer = new GeoJSONLayer({
       url: "src/assets/points.geojson",
@@ -88,15 +87,22 @@ esriConfig.apiKey = 'AAPK1d9ff5650e164ac09da678fe794990ae-BAm-ie8CRQuR0X-nJcYskl
     map.add(geojsonLayer)
     
     const zoomToRegion = (region) =>{    
-      view.goTo({
-        center: [view.center.longitude, view.center.latitude],
-        zoom: 3
-      },{duration: 2000, easing: 'ease'}).then(()=>{
+      if (view.zoom >3){
         view.goTo({
-          center: region.coordinates,
-          zoom: region.zoomLevel
-        }, {duration: 5000, easing: 'ease'})
-      })
+          center: [view.center.longitude, view.center.latitude],
+          zoom: 3
+        },{duration: 2000, easing: 'ease'}).then(()=>{
+          view.goTo({
+            center: region.coordinates,
+            zoom: region.zoomLevel
+          }, {duration: 5000, easing: 'ease'})
+        })
+      } else {
+        view.goTo({
+            center: region.coordinates,
+            zoom: region.zoomLevel
+          }, {duration: 5000, easing: 'ease'})
+      }
     }
   })
 </script>
