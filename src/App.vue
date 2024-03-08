@@ -3,8 +3,6 @@
   import MapContainer from './components/MapContainer.vue' 
   import { useMatchMedia } from './useMatchMedia';
 
-  
-
   const smallScreen = ref(useMatchMedia('(max-width: 1005px)'));
   
   let openDrawer = false;
@@ -85,7 +83,7 @@
             
             <q-img src="./assets/wave-pattern.svg" style="height: 200px" fit="cover">
               <q-item-section>
-                <q-item-label class='header-label' color="white">COASTAL<br>Resilience<br>Mapping Portal</q-item-label>
+                <q-item-label class='header-label' color="white"><b>COASTAL</b><br>Resilience<br>Mapping Portal</q-item-label>
                 <q-btn color="secondary"  text-color="white" label="Learn More" @click="alert = true"/> 
               </q-item-section>
             </q-img>
@@ -126,13 +124,15 @@
         </div>
         <div v-show="australia" >
           <q-btn icon="close" flat round dense @click="toggleAustralia"/>
+          
           <q-item>
             <q-item-section>
+              <q-item-label header>AUSTRALIA</q-item-label>
               <q-item-label class="main-caption" caption>The nation’s high level of biodiversity classifies it as one of 17 of the ‘megadiversity’ countries in the world, holding roughly two thirds of the world’s biodiversity. Climate adaptation strategies in Australia focus largely on coastal habitat restoration.</q-item-label>
             </q-item-section>
           </q-item>
           
-          <q-item>
+          <!-- <q-item>
             <q-item-section>
               <q-btn size="l" outline color='secondary' label="Victoria" />
             </q-item-section>
@@ -141,7 +141,21 @@
             <q-item-section>
               <q-btn size="l" outline color='secondary' label="Western Australia" />
             </q-item-section>
-          </q-item>
+          </q-item> -->
+          <q-expansion-item label="Victoria">
+            <q-card>
+              <q-card-section>
+                The temperate southern coast of Australia is home to hundreds of bays and estuaries containing important habitats like shellfish reefs, mangrove forests, seagrass beds and saltmarshes. The Nature Conservancy Australia is working to repair these coastal habitats and restore their critical natural services with a current focus on shellfish reef restoration.
+              </q-card-section>
+            </q-card>
+        </q-expansion-item>
+        <q-expansion-item label="Western Australia">
+            <q-card>
+              <q-card-section>
+                Restoration of marine habitats in the Peel region of Western Australia begins with outreach and data collection in order to visualize and prioritize efforts to protect valuable mangroves, salt marches, seagrasses, and shellfish reefs. This project in the Peel-Harvey estuary launches in March, 2018, with a series of workshops on different approaches to restore these marine habitats.
+              </q-card-section>
+            </q-card>
+        </q-expansion-item>
         </div>
 
         <div v-show="caribbean" >
@@ -300,6 +314,23 @@
           <q-card-section class="q-pt-none">
             Coastal Resilience supports a community of practitioners around the world who are applying spatial planning innovations to coastal hazard risk, resilience and adaptation issues. This is a global network providing access to peer practitioners, tools, information and training focused on nature-based solutions. For more information see our <a href="https://coastalresilience.org/" target="_blank">Coastal Resilience website.</a>
             <q-space />
+            <div class="q-pa-md row q-gutter-md">
+              <q-card class="my-card text-white text-center" style="background:#334a51">
+                <q-card-section>
+                  ENGAGEMENT <br> 100 communities across 11 countries trained in Coastal Resilience planning & action
+                </q-card-section>
+              </q-card>
+              <q-card class="my-card text-white text-center" style="background:#334a51">
+                <q-card-section>
+                  AWARENESS <br> 90 publications making the case for nature–based solutions that reduce risk
+                </q-card-section>
+              </q-card>
+              <q-card class="my-card text-white text-center" style="background:#334a51">
+                <q-card-section>
+                 ACTION <br> 25 restoration or conservation projects implemented using our decision support tools
+                </q-card-section>
+              </q-card>
+            </div>
             <div class="logos">
               <q-img class='partner-logos' src="./assets/partners/ASFPM-Logo-full-color.jpg" style="width: 80px" ></q-img>
               <q-img class='partner-logos' src="./assets/partners/azavea-logo.png" style="width: 80px" ></q-img>
@@ -361,5 +392,8 @@
     a {
       color: #8dc558;
     }
+  }
+  .my-card {
+    width: 30%;
   }
 </style>
