@@ -16,10 +16,11 @@
   const showMainDrawer = ref(true);
   const showSubregion = ref(false);
   const subregion = ref([]);
-  const coordinates = ref([])
+  const coordinates = ref([]);
+  const errorAlert = ref(false)
 
-  const { regions, subregions, error } = getFeatureLayer();
-
+  const { regions, subregions } = getFeatureLayer();
+  
   let openDrawer = false;
   let closeDrawer = true;
   if (smallScreen.value === true) {
@@ -52,6 +53,11 @@
     showSubregion.value = false;
     showMainDrawer.value = true;
   }
+
+  const showErrorPage = () =>{
+    errorAlert.value = true;
+  }
+
 </script>
 
 <template>
@@ -73,14 +79,12 @@
               </q-item-section>
             </q-img>
           </q-item>
-        
         <div v-show="showMainDrawer"> 
           <MainDrawer :regions='regions' @regionClick="showSubRegions" />
         </div>
         <div v-show="showSubregion">
           <SubRegion :subregion="subregion" :subregions="subregions" @closeSubRegion="closeSubRegions"/>
         </div>
-          
         </q-list>
         <div class="terms">
           <a href="http://coastalresilience.org/terms-of-use/" target="_blank">
@@ -143,7 +147,10 @@
       </q-dialog>
 
       <q-page-container>
-        <MapContainer :region="region" :coordinates="coordinates" />
+        <q-banner inline-actions class="text-white bg-red" v-show="errorAlert">
+        Sorry the map layers are not currently accessible. Please try again later.
+        </q-banner>
+        <MapContainer :region="region" :coordinates="coordinates"  @mapError="showErrorPage"/>
       </q-page-container>
     </q-layout>
 </template>

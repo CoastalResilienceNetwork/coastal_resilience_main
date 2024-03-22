@@ -2,6 +2,7 @@
 import { watch } from "vue"
 
 const props = defineProps(['region','coordinates']);
+const emit = defineEmits(['mapError'])
 
 function onReady(event) {
     const {view} = event.target;
@@ -9,6 +10,11 @@ function onReady(event) {
         zoomToRegion(newProps.coordinates);
     })
     view.ui.move([ "zoom"], "bottom-left");
+
+    view.on("layerview-create-error", function(event) {
+      emit('mapError')
+      console.error("LayerView failed to create for layer with the id: ", event.layer.id);
+    });
 
     const zoomToRegion = (coordinates) =>{  
         if (view.zoom >3){
