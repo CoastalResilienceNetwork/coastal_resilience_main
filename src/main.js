@@ -12,3 +12,5 @@ myApp.use(Quasar, quasarUserOptions)
 
 // Assumes you have a <div id="app"></div> in your index.html
 myApp.mount('#app')
+
+

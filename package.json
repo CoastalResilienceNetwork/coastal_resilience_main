@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@arcgis/core": "^4.29.0",
+    "@arcgis/map-components": "^4.29.9",
     "@quasar/extras": "^1.16.9",
     "quasar": "^2.14.5",
     "vue": "^3.4.15"
